@@ -231,3 +231,14 @@ GPIO_VALUE =[
     False, #Pin40 GPIO21
 ]
     
+
+# INSTANCE SETTINGS
+
+## Module Face Mask
+ENABLE_FACEMASK = False
+FACEMASH_DETECTOR = None
+
+
+## Module YOLO
+ENABLE_YOLOV8 = True
+YOLO_DETECTOR = None

@@ -4,10 +4,13 @@ import json
 from django.conf import settings
 from django.core import serializers
 import datetime
+import os
+
+####################################################################################################
 
 ERROR_CODE = 399
 SUCCESS_CODE = 200
-
+        
 ####################################################################################################
 
 def QuerySetToJson(query_set):
@@ -24,8 +27,22 @@ def ArrayQuerySetToJson(array_query_set):
 
 ####################################################################################################
 
+#this funtion is main() called when django start
 class ApiConfig(AppConfig):
     name = 'api'
+    def ready(self):
+        if os.environ.get('RUN_MAIN', None) != 'true':
+            return
+        
+        if(settings.ENABLE_FACEMASK):
+            from module.FaceMask.FaceMaskDetector import FaceMask
+            settings.FACEMASH_DETECTOR = FaceMask()
+        
+        if(settings.ENABLE_YOLOV8):
+            from module.YOLOv8.DetectObject import YOLOdetector
+            settings.YOLO_DETECTOR = YOLOdetector()
+    
+        print("API is ready")
 
 ####################################################################################################
 

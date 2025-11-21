@@ -190,16 +190,14 @@ class FaceMask:
 ####################################################################################################
 
 
-faceMask = FaceMask()
-
-if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
-    while True:
+# if __name__ == '__main__':
+#     cap = cv2.VideoCapture(0)
+#     while True:
         
-        _ret, frame = cap.read()
-        frame, arr = faceMask.DetectMask(frame)
+#         _ret, frame = cap.read()
+#         frame, arr = faceMask.DetectMask(frame)
 
-        cv.imshow('frame', frame)
-        ch = cv.waitKey(20)
-        if ch == 27:
-            break
+#         cv.imshow('frame', frame)
+#         ch = cv.waitKey(20)
+#         if ch == 27:
+#             break

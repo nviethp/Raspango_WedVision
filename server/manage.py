@@ -3,6 +3,10 @@ import os
 import sys
 
 if __name__ == "__main__":
+    if(len(sys.argv) == 1):
+        sys.argv.append('runserver')
+        sys.argv.append('0.0.0.0:80')
+        
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "raspango.settings")
     try:
         from django.core.management import execute_from_command_line

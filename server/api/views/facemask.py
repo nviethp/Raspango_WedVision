@@ -1,7 +1,4 @@
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-import json
-import hashlib
 import os
 import datetime, time
 from dateutil.parser import parse
@@ -12,7 +9,7 @@ from django.db.models import Q
 from api.views.loginsession import *
 from lib.TGMT.TGMTutil import *
 from django.conf import settings
-from module.FaceMask.FaceMaskDetector import faceMask
+
 
 ####################################################################################################
 
@@ -29,8 +26,8 @@ def DetectFacemask(request):
 
         startTime = time.time()
 
-        faceMask.drawText = False
-        mat, arr = faceMask.DetectMaskFromImagePath(uploaded_file_abs)
+        settings.FACEMASH_DETECTOR.drawText = False
+        mat, arr = settings.FACEMASH_DETECTOR.DetectMaskFromImagePath(uploaded_file_abs)
 
         elapsed = time.time() - startTime
         elapsed = round(elapsed, 2)

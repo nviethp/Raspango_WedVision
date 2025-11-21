@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 print(CURRENT_DIR)
 
-class DetectObject:
+class YOLOdetector:
     def __init__(self):
         modelFile = os.path.join(CURRENT_DIR, "yolov8n.pt")
         if os.path.exists(modelFile):
@@ -19,7 +19,7 @@ class DetectObject:
     def get_class_colors(self, num_classes):
         """Generate unique colors for each class using a colormap."""
         colors = plt.cm.get_cmap('tab20', num_classes)  #
-        return [tuple([int(255 * c) for c in colors(i)[:3]]) for i in range(num_classes)]  # Convert to RGB format
+        return [tuple([int(150 * c) for c in colors(i)[:3]]) for i in range(num_classes)]  # Convert to RGB format
 
     def Detect(self, img):
         results = self.model.predict(img)
@@ -36,13 +36,15 @@ class DetectObject:
                 class_name = self.model.names[c]
                 color = class_colors[c]  
                 annotator.box_label(b, class_name, color=color)
+
+        numObjects = len(results[0].boxes)
         img = annotator.result()
-        return img
+        return img, numObjects
 
-detectobj = DetectObject()
 
-if __name__ == '__main__':
-    img = cv2.imread('people.jpg')
-    img = detectobj.Detect(img)
-    cv2.imshow('YOLO V8 Detection', img)
-    cv2.waitKey(0)
+
+# if __name__ == '__main__':
+#     img = cv2.imread('people.jpg')
+#     img = detectobj.Detect(img)
+#     cv2.imshow('YOLO V8 Detection', img)
+#     cv2.waitKey(0)

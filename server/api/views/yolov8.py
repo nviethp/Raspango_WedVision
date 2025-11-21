@@ -1,7 +1,5 @@
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 import json
-import hashlib
 import os
 import datetime, time
 from dateutil.parser import parse
@@ -12,14 +10,19 @@ from django.db.models import Q
 from api.views.loginsession import *
 from lib.TGMT.TGMTutil import *
 from django.conf import settings
-from module.YOLOv8.DetectObject import detectobj
+
+
 ####################################################################################################
 
 @api_view(["POST"])           
 def DetectObject(request):
     try:
+        _token = request.POST.get("token")
+        jwt = FindLoginSession(_token)
+
+
         dirName = "yolov8"
-        _randFilename = datetime.datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S") + "_" + GenerateRandomString() + ".jpg"
+        _randFilename = GetVNTime().strftime("%Y-%m-%d_%H-%M-%S") + "_" + GenerateRandomString() + ".jpg"
         uploaded_file_abs = os.path.join(settings.MEDIA_ROOT, dirName, _randFilename)
         hasNewImage = SaveImageFromRequest(request, dirName, _randFilename)
 
@@ -29,7 +32,7 @@ def DetectObject(request):
         startTime = time.time()
 
         img = cv2.imread(uploaded_file_abs)
-        img = detectobj.Detect(img)
+        img, numObjects = settings.YOLO_DETECTOR.Detect(img)
 
         elapsed = time.time() - startTime
         elapsed = round(elapsed, 2)
@@ -39,6 +42,7 @@ def DetectObject(request):
         
         return Response(
             {'image_base64': strBase64,
+             'numObjects': numObjects,
             'elapsed' : elapsed},
             status=SUCCESS_CODE,
             content_type="application/json")
