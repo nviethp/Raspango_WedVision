@@ -4,22 +4,26 @@ import os
 from ultralytics.utils.plotting import Annotator
 import numpy as np
 import matplotlib.pyplot as plt
+import colorsys
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 print(CURRENT_DIR)
 
 class YOLOdetector:
     def __init__(self):
-        modelFile = os.path.join(CURRENT_DIR, "yolov8n.pt")
+        modelFile = os.path.join(CURRENT_DIR, "best_iron_detect.pt")
         if os.path.exists(modelFile):
             self.model = YOLO(modelFile)
         else:
             raise Exception("Missing model")
 
     def get_class_colors(self, num_classes):
-        """Generate unique colors for each class using a colormap."""
-        colors = plt.cm.get_cmap('tab20', num_classes)  #
-        return [tuple([int(150 * c) for c in colors(i)[:3]]) for i in range(num_classes)]  # Convert to RGB format
+        colors = []
+        for i in range(num_classes):
+            hue = i / num_classes
+            r, g, b = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
+            colors.append((int(r*255), int(g*255), int(b*255)))
+        return colors
 
     def Detect(self, img):
         results = self.model.predict(img)
