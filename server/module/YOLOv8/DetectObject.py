@@ -21,7 +21,7 @@ class YOLOdetector:
         colors = []
         for i in range(num_classes):
             hue = i / num_classes
-            r, g, b = colorsys.hsv_to_rgb(hue, 1.0, 1.0)
+            r, g, b = colorsys.hsv_to_rgb(hue, 0.5, 0.95)
             colors.append((int(r*255), int(g*255), int(b*255)))
         return colors
 
