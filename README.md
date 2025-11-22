@@ -4,7 +4,7 @@ Source code web server dùng để cung cấp API xử lý ảnh. Sử dụng Dj
 
 ## 1. Hướng dẫn cài đặt
 
-### 1.1 Cài đặt thư viện
+### Bước 1 Cài đặt thư viện
 - Cài đặt Python 3.10
 - Cài đặt Python package
 - Cài đặt Pytorch Pytorch 2.7.0 CUDA
@@ -14,10 +14,15 @@ Source code web server dùng để cung cấp API xử lý ảnh. Sử dụng Dj
 - Cài đặt ultralytics:
 `pip install ultralytics==8.2.28`
 
-### 1.2 Cài đặt công cụ lập trình
+### Bước 2 Cài đặt công cụ lập trình
 - Visual Studio Code
 - DB Browser for SQLite
-
+Bước 3: Clone source code Raspango
+Bước 4: Cài đặt các thư viện pip bằng lệnh pip install -r requirements.txt
+Bước 5: chạy file start.bat
+Bước 6: mở Chrome nhập địa chỉ localhost, trang web sẽ yêu cầu nhập username và password
+	Username: admin
+	Password: admin
 ## Hướng dẫn sử dụng
 
 ### Chạy server
@@ -29,6 +34,3 @@ Trên Windows chạy start.bat, trên Linux chạy file start.sh
 ### Tài khoản đăng nhập
 Username: admin
 Password: admin
-
-# Bài viết
-https://thigiacmaytinh.com/tgmtdjango-goi-code-opencv-python-qua-web-api/
