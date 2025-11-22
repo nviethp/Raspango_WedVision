@@ -17,6 +17,7 @@ Source code web server dùng để cung cấp API xử lý ảnh. Sử dụng Dj
 ### Bước 2 Cài đặt công cụ lập trình
 - Visual Studio Code
 - DB Browser for SQLite
+
 Bước 3: Clone source code Raspango
 Bước 4: Cài đặt các thư viện pip bằng lệnh pip install -r requirements.txt
 Bước 5: chạy file start.bat
